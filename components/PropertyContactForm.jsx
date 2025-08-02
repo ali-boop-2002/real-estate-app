@@ -3,7 +3,7 @@ import addMessage from "@/app/actions/addMessage";
 import { useSession } from "next-auth/react";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
-import SubmitMessageButton from "@/components/SubmitMessageButton";
+import SubmitMessageButton from "@/components/submitMessageButton";
 
 function PropertyContactForm({ property }) {
   const { data: session } = useSession();
@@ -13,18 +13,16 @@ function PropertyContactForm({ property }) {
     if (state.error) toast.error(state.error);
     if (state.submitted) toast.success("Message sent successfully");
   }, [state]);
-  {
-    state.submitted && (
-      <p className="text-green-600 mb-4 font-semibold">
-        Your message has been sent!
-      </p>
-    );
-  }
 
   return (
     session && (
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
+        {state.submitted && (
+          <p className="text-green-600 mb-4 font-semibold">
+            Your message has been sent!
+          </p>
+        )}
         <form action={formAction}>
           <input
             type="hidden"
