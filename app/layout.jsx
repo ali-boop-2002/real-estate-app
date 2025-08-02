@@ -1,17 +1,32 @@
+// app/layout.js or app/layout.tsx
+
 import "@/assets/styles/globals.css";
+import Footer from "@/components/Footer";
+import AuthProvider from "@/components/AuthProvider";
+import Navbar from "@/components/Navbar";
+import { ToastContainer } from "react-toastify";
+import { GlobalProvider } from "@/context/GlobalContext";
+import "photoswipe/dist/photoswipe.css";
+
 export const metadata = {
   title: "Property Pulse",
   keywords: "rental, property, real estate",
   description: "Find the perfect rental property",
 };
-function layout({ children }) {
+
+export default function MainLayout({ children }) {
   return (
-    <html>
-      <body>
-        <main>{children}</main>
-      </body>
-    </html>
+    <AuthProvider>
+      <GlobalProvider>
+        <html lang="en">
+          <body>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            <ToastContainer />
+          </body>
+        </html>
+      </GlobalProvider>
+    </AuthProvider>
   );
 }
-
-export default layout;
