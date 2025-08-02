@@ -13,9 +13,14 @@ function PropertyContactForm({ property }) {
     if (state.error) toast.error(state.error);
     if (state.submitted) toast.success("Message sent successfully");
   }, [state]);
-  if (state.submitted) {
-    <p className="text-green mb-4">Your message has been sent</p>;
+  {
+    state.submitted && (
+      <p className="text-green-600 mb-4 font-semibold">
+        Your message has been sent!
+      </p>
+    );
   }
+
   return (
     session && (
       <div className="bg-white p-6 rounded-lg shadow-md">
