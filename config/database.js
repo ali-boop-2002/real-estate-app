@@ -23,16 +23,21 @@ const connectDB = async () => {
 
   // Connect to MongoDb
   try {
+    console.log("Attempting to connect to MongoDB...");
+    console.log("MONGODB_URI length:", process.env.MONGODB_URI?.length || 0);
+
     await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 10000, // 10 second timeout
       socketTimeoutMS: 45000, // 45 second timeout
     });
     connected = true;
     connectionError = null;
-    console.log("MongoDB is connected");
+    console.log("MongoDB is connected successfully");
     return true;
   } catch (error) {
     console.log("MongoDB connection error:", error.message);
+    console.log("Error code:", error.code);
+    console.log("Error name:", error.name);
     connectionError = error.message;
     connected = false;
     return false;
