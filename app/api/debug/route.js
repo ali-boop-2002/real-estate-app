@@ -19,8 +19,15 @@ export async function GET() {
     let dbStatus = "Not attempted";
     let dbError = null;
     try {
-      const isConnected = await connectDB();
-      dbStatus = isConnected ? "Connected" : "Failed to connect";
+      const result = await connectDB();
+      dbStatus = result.success ? "Connected" : "Failed to connect";
+      dbError = result.error
+        ? {
+            message: result.error,
+            code: result.errorCode,
+            name: result.errorName,
+          }
+        : null;
     } catch (error) {
       dbStatus = `Error: ${error.message}`;
       dbError = {

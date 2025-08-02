@@ -5,9 +5,12 @@ import Property from "@/models/Property";
 
 async function HomeProperties() {
   try {
-    const isConnected = await connectDB();
-    if (!isConnected) {
-      console.log("Database connection failed for recent properties");
+    const result = await connectDB();
+    if (!result.success) {
+      console.log(
+        "Database connection failed for recent properties:",
+        result.error
+      );
       return (
         <>
           <section className="px-4 py-6">

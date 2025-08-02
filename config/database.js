@@ -7,7 +7,7 @@ const connectDB = async () => {
   // if the database is already connected, don't connect again
   if (connected) {
     console.log("MongoDB is connected");
-    return true;
+    return { success: true, error: null };
   }
 
   // Check if MONGODB_URI is available
@@ -18,7 +18,7 @@ const connectDB = async () => {
       Object.keys(process.env).filter((key) => key.includes("MONGODB"))
     );
     connectionError = "MONGODB_URI is not defined";
-    return false;
+    return { success: false, error: "MONGODB_URI is not defined" };
   }
 
   // Connect to MongoDb
@@ -33,14 +33,19 @@ const connectDB = async () => {
     connected = true;
     connectionError = null;
     console.log("MongoDB is connected successfully");
-    return true;
+    return { success: true, error: null };
   } catch (error) {
     console.log("MongoDB connection error:", error.message);
     console.log("Error code:", error.code);
     console.log("Error name:", error.name);
     connectionError = error.message;
     connected = false;
-    return false;
+    return {
+      success: false,
+      error: error.message,
+      errorCode: error.code,
+      errorName: error.name,
+    };
   }
 };
 

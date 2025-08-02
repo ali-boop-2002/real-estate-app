@@ -4,9 +4,12 @@ import FeaturedPropertyCard from "./FeaturedPropertyCard";
 
 async function FeaturedProperties() {
   try {
-    const isConnected = await connectDB();
-    if (!isConnected) {
-      console.log("Database connection failed for featured properties");
+    const result = await connectDB();
+    if (!result.success) {
+      console.log(
+        "Database connection failed for featured properties:",
+        result.error
+      );
       return null;
     }
 
