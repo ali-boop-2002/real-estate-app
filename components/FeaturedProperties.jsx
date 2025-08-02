@@ -4,7 +4,12 @@ import FeaturedPropertyCard from "./FeaturedPropertyCard";
 
 async function FeaturedProperties() {
   try {
-    await connectDB();
+    const isConnected = await connectDB();
+    if (!isConnected) {
+      console.log("Database connection failed for featured properties");
+      return null;
+    }
+
     const properties = await Property.find({ is_featured: true }).lean();
     return properties.length > 0 ? (
       <section className="bg-blue-50 px-4 pt-6 pb-10">
