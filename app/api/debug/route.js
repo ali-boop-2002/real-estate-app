@@ -17,17 +17,24 @@ export async function GET() {
 
     // Try database connection
     let dbStatus = "Not attempted";
+    let dbError = null;
     try {
       const isConnected = await connectDB();
       dbStatus = isConnected ? "Connected" : "Failed to connect";
     } catch (error) {
       dbStatus = `Error: ${error.message}`;
+      dbError = {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+      };
     }
 
     return Response.json({
       timestamp: new Date().toISOString(),
       environment: envVars,
       database: dbStatus,
+      dbError: dbError,
       server: "API route working",
     });
   } catch (error) {
