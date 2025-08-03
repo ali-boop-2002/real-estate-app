@@ -14,9 +14,14 @@ function DebugInfo() {
         const response = await fetch("/api/debug");
         const data = await response.json();
 
+        // Also test the dedicated MongoDB connection
+        const mongoResponse = await fetch("/api/test-mongo");
+        const mongoData = await mongoResponse.json();
+
         setDebugInfo({
           isBrowser,
           ...data,
+          mongoTest: mongoData,
         });
       } catch (error) {
         setDebugInfo({
