@@ -3,14 +3,19 @@ import User from "@/models/User";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 async function SavedPropertiesPage() {
-  const { userId } = await getSessionUser();
+  try {
+    const { userId } = await getSessionUser();
 
-  console.log(userId, "savedUserId");
+    console.log(userId, "savedUserId");
 
-  const { bookmarks } = await User.findById(userId).populate("bookmarks");
+    const { bookmarks } = await User.findById(userId).populate("bookmarks");
 
-  console.log(bookmarks, "saveBookMarks");
-  console.log(bookmarks);
+    console.log(bookmarks, "saveBookMarks");
+    console.log(bookmarks);
+  } catch (error) {
+    console.error(error);
+  }
+
   return (
     <section className="px-4 py-6 h-screen">
       <div className="container lg:container m-auto px-4 py-6">
