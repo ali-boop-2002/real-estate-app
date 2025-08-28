@@ -25,7 +25,7 @@ const PropertySchema = new Schema(
     },
     beds: {
       type: Number,
-      requried: true,
+      required: true,
     },
     baths: {
       type: Number,
