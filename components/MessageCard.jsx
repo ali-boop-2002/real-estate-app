@@ -43,13 +43,13 @@ function MessageCard({ message }) {
       <ul className="mt-4">
         <li>
           <strong>Reply Email:</strong>{" "}
-          <a href={`mailto${message.email}`} className="text-blue-500">
+          <a href={`mailto${message.email}`} className="text-green-500">
             {message.email}
           </a>
         </li>
         <li>
           <strong>Reply Phone:</strong>{" "}
-          <a href={`tel:${message.phone}`} className="text-blue-500">
+          <a href={`tel:${message.phone}`} className="text-green-500">
             {message.phone}
           </a>
         </li>
@@ -60,7 +60,7 @@ function MessageCard({ message }) {
       </ul>
       <button
         onClick={handleReadClick}
-        className="mt-4 mr-3 bg-blue-500 text-white py-1 px-3 rounded-md"
+        className="mt-4 mr-3 bg-green-500 text-white py-1 px-3 rounded-md"
       >
         {isRead ? "Mark As New" : "Mark As Read"}
       </button>

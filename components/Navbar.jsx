@@ -23,7 +23,7 @@ function Navbar() {
     setAuthProviders();
   }, []);
   return (
-    <nav className="bg-blue-700 border-b border-blue-500">
+    <nav className="bg-green-700 border-b border-green-500">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-20 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -61,7 +61,7 @@ function Navbar() {
               <Image className="h-10 w-auto" src={logo} alt="PropertyPulse" />
 
               <span className="hidden md:block text-white text-2xl font-bold ml-2">
-                PropertyPulse
+                Real Estate
               </span>
             </Link>
             {/* <!-- Desktop Menu Hidden below md screens --> */}

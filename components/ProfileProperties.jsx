@@ -21,7 +21,7 @@ function ProfileProperties({ properties: initialProperties }) {
     toast.success("Property deleted Successfully");
   };
   return properties.map((property) => (
-    <div className="mb-10" key={property.id}>
+    <div className="mb-10" key={property._id}>
       <Link href={`/properties/${property._id}`}>
         <Image
           className="h-32 w-full rounded-md object-cover"
@@ -41,7 +41,7 @@ function ProfileProperties({ properties: initialProperties }) {
       <div className="mt-2">
         <Link
           href={`/properties/${property._id}/edit`}
-          className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
+          className="bg-green-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-green-600"
         >
           Edit
         </Link>

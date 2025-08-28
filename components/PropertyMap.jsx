@@ -2,7 +2,8 @@
 import { setDefaults, fromAddress } from "react-geocode";
 import { useEffect, useState } from "react";
 import { Map, Marker } from "react-map-gl/maplibre";
-import "mapbox-gl/dist/mapbox-gl.css";
+
+import "maplibre-gl/dist/maplibre-gl.css";
 import Image from "next/image";
 import pin from "@/assets/images/pin.svg";
 import Spinner from "./Spinner";
@@ -13,8 +14,6 @@ function PropertyMap({ property }) {
     latitude: 0,
     longitude: 0,
     zoom: 12,
-    width: "100%",
-    height: "500px",
   });
   const [loading, setLoading] = useState(true);
   const [geocodeError, setGeocodeError] = useState(false);
@@ -60,8 +59,6 @@ function PropertyMap({ property }) {
     !loading && (
       <div className="w-full h-[500px] relative">
         <Map
-          mapboxAccessToken={process.env.NEXT_PUBLIC_GOOGLE_GEOCODING_API_KEY}
-          mapLib={import("maplibre-gl")}
           initialViewState={{
             longitude: lng,
             latitude: lat,
@@ -70,8 +67,10 @@ function PropertyMap({ property }) {
           mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
           style={{ width: "100%", height: 500 }}
         >
-          <Marker longitude={lng} latitude={lat} anchor="center">
-            <div className="w-5 h-5 bg-red-600 rounded-full border-2 border-white shadow-lg" />
+          <Marker longitude={lng} latitude={lat} anchor="bottom">
+            <div className="w-6 h-6 bg-red-600 rounded-full border-2 border-white shadow-lg flex items-center justify-center">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+            </div>
           </Marker>
         </Map>
       </div>
