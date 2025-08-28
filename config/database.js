@@ -22,7 +22,6 @@ const connectDB = async () => {
         serverSelectionTimeoutMS: 10000, // Increased timeout
         socketTimeoutMS: 45000,
         bufferCommands: false,
-        bufferMaxEntries: 0,
       })
       .then((mongoose) => {
         console.log("Database connected successfully");
