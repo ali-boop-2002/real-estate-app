@@ -1,19 +1,22 @@
+export const dynamic = "force-dynamic";
+
 import PropertyCard from "@/components/PropertyCard";
 import User from "@/models/User";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 async function SavedPropertiesPage() {
+  let bookmarks;
   try {
     const { userId } = await getSessionUser();
 
     console.log(userId, "savedUserId");
 
-    const { bookmarks } = await User.findById(userId).populate("bookmarks");
+    let { bookmarks } = await User.findById(userId).populate("bookmarks");
 
     console.log(bookmarks, "saveBookMarks");
     console.log(bookmarks);
   } catch (error) {
-    console.error(error);
+    console.error(error, "errormAAA");
   }
 
   return (
