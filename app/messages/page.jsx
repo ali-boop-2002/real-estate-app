@@ -7,7 +7,9 @@ import { getSessionUser } from "@/utils/getSessionUser";
 async function MessagesPage() {
   await connectDB();
   const sessionUser = await getSessionUser();
+  console.log(sessionUser, "sessionUSer");
   const { userId } = sessionUser;
+  console.log(userId, "userId");
   const readMessages = await Message.find({
     recipient: userId,
     read: true,

@@ -5,7 +5,11 @@ import { getSessionUser } from "@/utils/getSessionUser";
 async function SavedPropertiesPage() {
   const { userId } = await getSessionUser();
 
+  console.log(userId, "savedUserId");
+
   const { bookmarks } = await User.findById(userId).populate("bookmarks");
+
+  console.log(bookmarks, "saveBookMarks");
   console.log(bookmarks);
   return (
     <section className="px-4 py-6 h-screen">
