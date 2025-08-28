@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import PropertyCard from "@/components/PropertyCard";
 import connectDB from "@/config/database";
 import User from "@/models/User";
+import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 async function SavedPropertiesPage() {
@@ -28,9 +29,13 @@ async function SavedPropertiesPage() {
     console.log(sessionUser.userId, "savedUserId");
 
     // Ensure database connection
+    console.log("Connecting to database...");
     await connectDB();
+    console.log("Database connected successfully");
 
+    console.log("Finding user with ID:", sessionUser.userId);
     const user = await User.findById(sessionUser.userId).populate("bookmarks");
+    console.log("User found:", user ? "Yes" : "No");
 
     if (!user) {
       console.log("User not found in database");
@@ -45,9 +50,15 @@ async function SavedPropertiesPage() {
     }
 
     bookmarks = user.bookmarks || [];
-    console.log(bookmarks, "saveBookMarks");
+    console.log("Bookmarks found:", bookmarks.length);
+    console.log("Bookmarks data:", bookmarks);
   } catch (err) {
     console.error("Error loading saved properties:", err);
+    console.error("Error details:", {
+      message: err.message,
+      stack: err.stack,
+      name: err.name,
+    });
     error = err;
     bookmarks = [];
   }
