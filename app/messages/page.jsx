@@ -8,7 +8,7 @@ async function MessagesPage() {
   let readMessages;
   let unreadMessages;
   try {
-    connectDB();
+    await connectDB();
     const sessionUser = await getSessionUser();
     const { userId } = sessionUser;
     readMessages = await Message.find({
