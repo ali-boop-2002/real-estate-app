@@ -1,4 +1,3 @@
-import logo from "@/assets/images/logo.png";
 import newLogo from "@/public/logo/house.jpg";
 import Image from "next/image";
 import Link from "next/link";

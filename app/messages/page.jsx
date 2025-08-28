@@ -5,26 +5,32 @@ import { convertToSerializableObject } from "@/utils/convertToObjects";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 async function MessagesPage() {
-  connectDB();
-  const sessionUser = await getSessionUser();
-  const { userId } = sessionUser;
-  const readMessages = await Message.find({
-    recipient: userId,
-    read: true,
-  })
-    .sort({ createdAt: -1 })
-    .populate("sender", "username")
-    .populate("property", "name")
-    .lean();
+  let readMessages;
+  let unreadMessages;
+  try {
+    connectDB();
+    const sessionUser = await getSessionUser();
+    const { userId } = sessionUser;
+    readMessages = await Message.find({
+      recipient: userId,
+      read: true,
+    })
+      .sort({ createdAt: -1 })
+      .populate("sender", "username")
+      .populate("property", "name")
+      .lean();
 
-  const unreadMessages = await Message.find({
-    recipient: userId,
-    read: false,
-  })
-    .sort({ createdAt: -1 })
-    .populate("sender", "username")
-    .populate("property", "name")
-    .lean();
+    unreadMessages = await Message.find({
+      recipient: userId,
+      read: false,
+    })
+      .sort({ createdAt: -1 })
+      .populate("sender", "username")
+      .populate("property", "name")
+      .lean();
+  } catch (err) {
+    console.error;
+  }
 
   const messages = [...unreadMessages, ...readMessages].map((messageDoc) => {
     const message = convertToSerializableObject(messageDoc);
