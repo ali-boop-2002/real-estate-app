@@ -5,18 +5,20 @@ import User from "@/models/User";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 async function SavedPropertiesPage() {
-  let bookmarks;
+  let bookmarks = [];
   try {
     const { userId } = await getSessionUser();
 
     console.log(userId, "savedUserId");
 
-    let { bookmarks } = await User.findById(userId).populate("bookmarks");
+    const user = await User.findById(userId).populate("bookmarks");
+    bookmarks = user?.bookmarks || [];
 
     console.log(bookmarks, "saveBookMarks");
     console.log(bookmarks);
   } catch (error) {
     console.error(error, "errormAAA");
+    bookmarks = [];
   }
 
   return (
