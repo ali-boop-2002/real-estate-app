@@ -26,6 +26,9 @@ async function MessagesPage() {
     .populate("property", "name")
     .lean();
 
+  // console.log(unreadMessages, "unread ");
+  // console.log(readMessages, "read");
+
   const messages = [...unreadMessages, ...readMessages].map((messageDoc) => {
     const message = convertToSerializableObject(messageDoc);
     message.sender = convertToSerializableObject(messageDoc.sender);

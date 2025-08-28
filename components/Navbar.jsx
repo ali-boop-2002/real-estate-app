@@ -11,6 +11,8 @@ import UnreadMessageCount from "./UnreadMessageCount";
 function Navbar() {
   const { data: session } = useSession();
   const profileImage = session?.user?.image;
+
+  console.log(session, "navbar");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [providers, setProviders] = useState(null);
