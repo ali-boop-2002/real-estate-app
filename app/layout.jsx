@@ -12,6 +12,9 @@ export const metadata = {
   title: "Property Pulse",
   keywords: "rental, property, real estate",
   description: "Find the perfect rental property",
+  icons: {
+    icon: "/logo/house.jpg", // <-- your favicon file path
+  },
 };
 
 export default function MainLayout({ children }) {
