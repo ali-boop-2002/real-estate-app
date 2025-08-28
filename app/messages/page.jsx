@@ -5,6 +5,7 @@ import { convertToSerializableObject } from "@/utils/convertToObjects";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 async function MessagesPage() {
+  let messages = [];
   try {
     await connectDB();
     const sessionUser = await getSessionUser();
@@ -46,7 +47,7 @@ async function MessagesPage() {
     // console.log(unreadMessages, "unread ");
     // console.log(readMessages, "read");
 
-    const messages = [...unreadMessages, ...readMessages].map((messageDoc) => {
+    let messages = [...unreadMessages, ...readMessages].map((messageDoc) => {
       const message = convertToSerializableObject(messageDoc);
       message.sender = convertToSerializableObject(messageDoc.sender);
       message.property = convertToSerializableObject(messageDoc.property);
