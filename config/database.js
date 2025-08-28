@@ -12,7 +12,7 @@ const connectDB = async () => {
   }
 
   if (!cached.promise) {
-    mongoose.set("strictQuery", true);
+    mongoose.set("strictQuery", false);
 
     cached.promise = mongoose
       .connect(process.env.MONGODB_URI, {
