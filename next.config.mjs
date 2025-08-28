@@ -19,6 +19,9 @@ const nextConfig = {
       bodySizeLimit: "10mb",
     },
   },
+  // Optimize for serverless deployment
+  output: "standalone",
+  poweredByHeader: false,
 };
 
 export default nextConfig;

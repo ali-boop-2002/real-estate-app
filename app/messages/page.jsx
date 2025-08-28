@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import MessageCard from "@/components/MessageCard";
 import connectDB from "@/config/database";
 import Message from "@/models/Message";

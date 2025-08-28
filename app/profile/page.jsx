@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Image from "next/image";
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
@@ -7,14 +9,40 @@ import ProfileProperties from "@/components/ProfileProperties";
 import { convertToSerializableObject } from "@/utils/convertToObjects";
 
 async function ProfilePage() {
-  await connectDB();
-  const sessionUser = await getSessionUser();
-  const { userId } = sessionUser;
-  if (!userId) {
-    throw new Error("User ID is required");
+  try {
+    await connectDB();
+    const sessionUser = await getSessionUser();
+
+    if (!sessionUser || !sessionUser.userId) {
+      return (
+        <section className="bg-green-50">
+          <div className="container m-auto py-24">
+            <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
+              <h1 className="text-3xl font-bold mb-4">Your Profile</h1>
+              <p>Please sign in to view your profile.</p>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    const { userId } = sessionUser;
+    const propertiesDocs = await Property.find({ owner: userId }).lean();
+    const properties = propertiesDocs.map(convertToSerializableObject);
+  } catch (error) {
+    console.error("Error loading profile:", error);
+    return (
+      <section className="bg-green-50">
+        <div className="container m-auto py-24">
+          <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
+            <h1 className="text-3xl font-bold mb-4">Your Profile</h1>
+            <p>Error loading profile. Please try again later.</p>
+          </div>
+        </div>
+      </section>
+    );
   }
-  const propertiesDocs = await Property.find({ owner: userId }).lean();
-  const properties = propertiesDocs.map(convertToSerializableObject);
+
   return (
     <section className="bg-green-50">
       <div className="container m-auto py-24">
